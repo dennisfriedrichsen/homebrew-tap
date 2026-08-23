@@ -2,7 +2,7 @@ class LlamaModel < Formula
   desc "Manage and run local GGUF models with llama-server"
   homepage "https://github.com/dennisfriedrichsen/llama-model"
   url "https://github.com/dennisfriedrichsen/llama-model/archive/refs/tags/0.3.0.tar.gz"
-  sha256 "d5558cd419c8d46bdc958064cb97f963d1ea793866414c025906ec15033512ed"
+  sha256 "f78434eb00ac66ed5f4316772b25948677bcba06b69eec84fc681c1293a24d9d"
   license "BSD-2-Clause"
 
   depends_on "llama.cpp"
