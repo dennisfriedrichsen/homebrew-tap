@@ -16,7 +16,7 @@ class LlamaModel < Formula
     doc.install "README.md"
 
     (pkgshare/"examples").install \
-      "llama-models.conf.example",
+      "llama-model.conf.example",
       "server.args.example"
   end
 
