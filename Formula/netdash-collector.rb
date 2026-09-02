@@ -4,8 +4,8 @@
 # Ships as: brew install dennisfriedrichsen/tap/netdash-collector
 #
 # Re-publishing a new version:
-#   git tag 0.3.2 && git push origin 0.3.2
-#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.3.2.tar.gz | shasum -a 256
+#   git tag 0.4.0 && git push origin 0.4.0
+#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.4.0.tar.gz | shasum -a 256
 #
 # netdash-patchcheck is a separate formula from the same tarball: Homebrew
 # allows one service per formula, and the patch check runs daily rather than
@@ -13,8 +13,8 @@
 class NetdashCollector < Formula
   desc "Pushes CPU, memory and disk metrics to a netdash server"
   homepage "https://github.com/dennisfriedrichsen/netdash"
-  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.3.2.tar.gz"
-  sha256 "c8848cdb7d739ba660d209eaa50e814e4e52cfebe7f18654630e2037df625dcd"
+  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.4.0.tar.gz"
+  sha256 "397ef26b5b9302ce966ad17c960405d3e50ef1c6235d5f2b454f0660b82043e7"
   license "BSD-2-Clause"
 
   def install
@@ -71,5 +71,8 @@ class NetdashCollector < Formula
     # any host reports, so a build that lost its version stamp would read as
     # "not reporting" forever rather than as out of date.
     assert_match(/"collector_version":"\d+\.\d+\.\d+"/, output)
+    # "none", a hypervisor name, or null -- but the field must be present, or
+    # the dashboard files this Mac under neither Bare metal nor VMs.
+    assert_match(/"virt":/, output)
   end
 end
