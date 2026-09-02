@@ -4,13 +4,17 @@
 # Ships as: brew install dennisfriedrichsen/tap/netdash-collector
 #
 # Re-publishing a new version:
-#   git tag 0.2.4 && git push origin 0.2.4
-#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.2.4.tar.gz | shasum -a 256
+#   git tag 0.3.0 && git push origin 0.3.0
+#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.3.0.tar.gz | shasum -a 256
+#
+# netdash-patchcheck is a separate formula from the same tarball: Homebrew
+# allows one service per formula, and the patch check runs daily rather than
+# every 60 seconds.
 class NetdashCollector < Formula
   desc "Pushes CPU, memory and disk metrics to a netdash server"
   homepage "https://github.com/dennisfriedrichsen/netdash"
-  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.2.4.tar.gz"
-  sha256 "0419b39e05b1b7b9d69ef7a35328034581eeffed3c09347ffa68e7762efd7886"
+  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.3.0.tar.gz"
+  sha256 "9514acaf0ff293443a536aa142581f848683aa856eb0be21fac3ed30145de2c8"
   license "BSD-2-Clause"
 
   def install
@@ -45,6 +49,12 @@ class NetdashCollector < Formula
       Verify what it will send:
         netdash-collector --print
 
+      For the patch status badge (security updates pending), also install:
+        brew install dennisfriedrichsen/tap/netdash-patchcheck
+        brew services start netdash-patchcheck
+      Without it the card reads "not checked" -- which is deliberate: an
+      unchecked host must never be shown as up to date.
+
       Updates later:
         brew update && brew upgrade netdash-collector
       (brew services restarts the job automatically on upgrade.)
@@ -52,6 +62,10 @@ class NetdashCollector < Formula
   end
 
   test do
-    assert_match "cpu_pct", shell_output("#{bin}/netdash-collector --print")
+    output = shell_output("#{bin}/netdash-collector --print")
+    assert_match "cpu_pct", output
+    # Always present, null when no patch check has run -- the server reads a
+    # missing or null value as "unknown" rather than as up to date.
+    assert_match "patches", output
   end
 end
