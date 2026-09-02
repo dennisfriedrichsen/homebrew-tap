@@ -4,8 +4,8 @@
 # Ships as: brew install dennisfriedrichsen/tap/netdash-collector
 #
 # Re-publishing a new version:
-#   git tag 0.3.1 && git push origin 0.3.1
-#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.3.1.tar.gz | shasum -a 256
+#   git tag 0.3.2 && git push origin 0.3.2
+#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.3.2.tar.gz | shasum -a 256
 #
 # netdash-patchcheck is a separate formula from the same tarball: Homebrew
 # allows one service per formula, and the patch check runs daily rather than
@@ -13,8 +13,8 @@
 class NetdashCollector < Formula
   desc "Pushes CPU, memory and disk metrics to a netdash server"
   homepage "https://github.com/dennisfriedrichsen/netdash"
-  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.3.1.tar.gz"
-  sha256 "c122ef7d8fee3c5816c6ecd46eafbaa4df9e94b151e9e3423c3e3435974215f7"
+  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.3.2.tar.gz"
+  sha256 "c8848cdb7d739ba660d209eaa50e814e4e52cfebe7f18654630e2037df625dcd"
   license "BSD-2-Clause"
 
   def install
@@ -67,5 +67,9 @@ class NetdashCollector < Formula
     # Always present, null when no patch check has run -- the server reads a
     # missing or null value as "unknown" rather than as up to date.
     assert_match "patches", output
+    # The server flags hosts running an old collector against the newest version
+    # any host reports, so a build that lost its version stamp would read as
+    # "not reporting" forever rather than as out of date.
+    assert_match(/"collector_version":"\d+\.\d+\.\d+"/, output)
   end
 end
