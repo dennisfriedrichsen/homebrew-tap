@@ -4,8 +4,8 @@
 # Ships as: brew install dennisfriedrichsen/tap/netdash-collector
 #
 # Re-publishing a new version:
-#   git tag 0.4.1 && git push origin 0.4.1
-#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.4.1.tar.gz | shasum -a 256
+#   git tag 0.5.0 && git push origin 0.5.0
+#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.5.0.tar.gz | shasum -a 256
 #
 # netdash-patchcheck is a separate formula from the same tarball: Homebrew
 # allows one service per formula, and the patch check runs daily rather than
@@ -13,8 +13,8 @@
 class NetdashCollector < Formula
   desc "Pushes CPU, memory and disk metrics to a netdash server"
   homepage "https://github.com/dennisfriedrichsen/netdash"
-  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.4.1.tar.gz"
-  sha256 "29c10cac639b1cce8d801dd99094c54062b97333912dcffddc393abde46ac8c1"
+  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.5.0.tar.gz"
+  sha256 "855f5c69b34d29008211e6ed79b9055b268cf50bc99b863400ba96463563ab90"
   license "BSD-2-Clause"
 
   def install
