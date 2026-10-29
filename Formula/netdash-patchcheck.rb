@@ -8,13 +8,13 @@
 # collector every 60 seconds, this once a day.
 #
 # Re-publishing a new version:
-#   git tag 0.5.0 && git push origin 0.5.0
-#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.5.0.tar.gz | shasum -a 256
+#   git tag 0.5.1 && git push origin 0.5.1
+#   curl -sL https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.5.1.tar.gz | shasum -a 256
 class NetdashPatchcheck < Formula
   desc "Reports pending macOS security updates to a netdash server"
   homepage "https://github.com/dennisfriedrichsen/netdash"
-  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.5.0.tar.gz"
-  sha256 "855f5c69b34d29008211e6ed79b9055b268cf50bc99b863400ba96463563ab90"
+  url "https://github.com/dennisfriedrichsen/netdash/archive/refs/tags/0.5.1.tar.gz"
+  sha256 "6309899a8dc48ebd622e89ea1cf7250d8bc4fd9ac522b006fb181fb974618cbe"
   license "BSD-2-Clause"
 
   # For the shared $(brew --prefix)/etc/netdash/collector.conf, and because a
